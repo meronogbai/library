@@ -16,26 +16,32 @@ let bookOne = new Book("Book One", "JKR", 53, "yes");
 let bookTwo = new Book("Book Two", "Author Two", 23, "no");
 let bookThree = new Book("Book Three", "Author Three", 103, "yes");
 
-let myLibrary = [bookOne.info(), bookTwo.info(), bookThree.info()];
+let myLibrary = [bookOne, bookTwo, bookThree];
 
 function displayBook(book) {
     const table = document.querySelector('#table')
     const tr = document.createElement('tr')
-    const tdOne = document.createElement('td')
-    const tdTwo = document.createElement('td')
-    const tdThree = document.createElement('td')
-    const tdFour = document.createElement('td')
+    const title = document.createElement('td')
+    const author = document.createElement('td')
+    const pages = document.createElement('td')
+    const read = document.createElement('td')
 
-    tdOne.textContent = book.title
-    tdTwo.textContent = book.author
-    tdThree.textContent = book.pages
-    tdFour.textContent = book.read
+    title.textContent = book.title
+    author.textContent = book.author
+    pages.textContent = book.pages
+    read.textContent = book.read
     
-    tr.appendChild(tdOne)
-    tr.appendChild(tdTwo)
-    tr.appendChild(tdThree)
-    tr.appendChild(tdFour)
+    tr.appendChild(title)
+    tr.appendChild(author)
+    tr.appendChild(pages)
+    tr.appendChild(read)
     table.appendChild(tr)
 }
 
+function eachBook(library) {
+  for(let i = 0; i < library.length; i++) {
+    displayBook(library[i])
+  }
+}
 
+eachBook(myLibrary)
