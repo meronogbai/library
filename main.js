@@ -12,9 +12,9 @@ function addBookToLibrary(book) {
   myLibrary.push(book);
 }
 
-let bookOne = new Book("Book One", "JKR", 53, "yes");
-let bookTwo = new Book("Book Two", "Author Two", 23, "no");
-let bookThree = new Book("Book Three", "Author Three", 103, "yes");
+let bookOne = new Book("Book One", "JKR", 53, "Yes");
+let bookTwo = new Book("Book Two", "Author Two", 23, "No");
+let bookThree = new Book("Book Three", "Author Three", 103, "Yes");
 
 let myLibrary = [bookOne, bookTwo, bookThree];
 
@@ -35,7 +35,8 @@ function displayBook(book) {
   tr.appendChild(author)
   tr.appendChild(pages)
   tr.appendChild(read)
-  deleteBook(tr)
+  deleteBook(book, tr)
+  readStatusToggle(book, tr)
   table.appendChild(tr)
 }
 // unnecessary
@@ -48,33 +49,36 @@ function eachBook(library) {
 eachBook(myLibrary)
 //
 
-function deleteBook(tr) {
-  // const btn = document.createElement('td')
+function deleteBook(book, tr) {
   const createBtn = document.createElement('button')
 
   createBtn.addEventListener('click', function (e) {
-    const tr = e.target.parentElement
     tr.parentNode.removeChild(tr)
+    if (myLibrary.indexOf(book) !== -1) {
+      myLibrary.splice(myLibrary.indexOf(book), 1)
+    }
   })
 
   createBtn.textContent = 'Delete'
-  createBtn.setAttribute('class', 'delete-btn')
   tr.appendChild(createBtn)
 }
 
-function readStatusToggle(book) {
+function readStatusToggle(book, tr) {
   const createBtn = document.createElement('button')
-  if (read === 'yes') {
-    createBtn.textContent = "Finished"
-    createBtn.addEventListener('click', function (e) {
+
+  createBtn.addEventListener('click', function (e) {
+    const status = tr.querySelector('td:nth-child(4)')
+    if (book.read == "Yes") {
+      status.textContent = "No"
       book.read = 'No'
-    })
-  } else {
-    createBtn.textContent = "Not Finished"
-    createBtn.addEventListener('click', function (e) {
+    } else {
+      status.textContent = "Yes"
       book.read = 'Yes'
-    })
-  }
+    }
+  })
+
+  createBtn.textContent = "Toggle status"
+  tr.appendChild(createBtn)
 }
 
 function displayForm() {
