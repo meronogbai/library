@@ -35,6 +35,7 @@ function displayBook(book) {
   tr.appendChild(author)
   tr.appendChild(pages)
   tr.appendChild(read)
+  deleteBook(tr)
   table.appendChild(tr)
 }
 
@@ -45,6 +46,22 @@ function eachBook(library) {
 }
 
 eachBook(myLibrary)
+
+function deleteBook(tr) {
+  const btn = document.createElement('td')
+  const createBtn = document.createElement('button')
+
+  createBtn.addEventListener('click', function(e) {
+    const tr = e.target.parentElement
+      tr.parentNode.removeChild(tr)
+  })
+
+  createBtn.textContent = 'Delete'
+  createBtn.setAttribute('class', 'delete-btn')
+
+  tr.appendChild(btn)
+  tr.appendChild(createBtn)
+}
 
 function displayForm() {
   document.getElementById("newBookForm").style.display = "block";
