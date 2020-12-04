@@ -45,3 +45,7 @@ function eachBook(library) {
 }
 
 eachBook(myLibrary)
+
+function displayForm() {
+  document.getElementById("new-book-form").style.display = "block";
+}
