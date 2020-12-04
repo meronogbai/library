@@ -1,24 +1,54 @@
+const newBookForm = document.forms.newBookForm
+
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read;
-  this.info = function () {
-    return `${title} by ${author}, ${pages} pages, ${read}`;
-  };
 }
 
-function addBookToLibrary(book) {
+const addBookToLibrary = (book) => {
   myLibrary.push(book);
 }
 
-let bookOne = new Book("Book One", "JKR", 53, "Yes");
-let bookTwo = new Book("Book Two", "Author Two", 23, "No");
-let bookThree = new Book("Book Three", "Author Three", 103, "Yes");
+let exampleOne = new Book("Harry Potter", "JK Rowling", 350, "Yes");
+let exampleTwo = new Book("Mocking Bird", "Author", 280, "No");
 
-let myLibrary = [bookOne, bookTwo, bookThree];
+let myLibrary = [exampleOne, exampleTwo];
 
-function displayBook(book) {
+const deleteBook = (book, tr) => {
+  const createBtn = document.createElement('button')
+
+  createBtn.addEventListener('click', (e) => {
+    tr.parentNode.removeChild(tr)
+    if (myLibrary.indexOf(book) !== -1) {
+      myLibrary.splice(myLibrary.indexOf(book), 1)
+    }
+  })
+
+  createBtn.textContent = 'Delete'
+  tr.appendChild(createBtn)
+}
+
+const readStatusToggle = (book, tr) => {
+  const createBtn = document.createElement('button')
+
+  createBtn.addEventListener('click', (e) => {
+    const status = tr.querySelector('td:nth-child(4)')
+    if (book.read == "Yes") {
+      status.textContent = "No"
+      book.read = 'No'
+    } else {
+      status.textContent = "Yes"
+      book.read = 'Yes'
+    }
+  })
+
+  createBtn.textContent = "Toggle status"
+  tr.appendChild(createBtn)
+}
+
+const displayBook = (book) => {
   const table = document.querySelector('#table')
   const tr = document.createElement('tr')
   const title = document.createElement('td')
@@ -39,54 +69,20 @@ function displayBook(book) {
   readStatusToggle(book, tr)
   table.appendChild(tr)
 }
-// unnecessary
-function eachBook(library) {
+
+// examples
+const eachBook = (library) => {
   for (let i = 0; i < library.length; i++) {
     displayBook(library[i])
   }
 }
-
 eachBook(myLibrary)
-//
 
-function deleteBook(book, tr) {
-  const createBtn = document.createElement('button')
-
-  createBtn.addEventListener('click', function (e) {
-    tr.parentNode.removeChild(tr)
-    if (myLibrary.indexOf(book) !== -1) {
-      myLibrary.splice(myLibrary.indexOf(book), 1)
-    }
-  })
-
-  createBtn.textContent = 'Delete'
-  tr.appendChild(createBtn)
-}
-
-function readStatusToggle(book, tr) {
-  const createBtn = document.createElement('button')
-
-  createBtn.addEventListener('click', function (e) {
-    const status = tr.querySelector('td:nth-child(4)')
-    if (book.read == "Yes") {
-      status.textContent = "No"
-      book.read = 'No'
-    } else {
-      status.textContent = "Yes"
-      book.read = 'Yes'
-    }
-  })
-
-  createBtn.textContent = "Toggle status"
-  tr.appendChild(createBtn)
-}
-
-function displayForm() {
+const displayForm = () => {
   document.getElementById("newBookForm").style.display = "block";
 }
 
-newBookForm = document.forms.newBookForm
-newBookForm.addEventListener('submit', function (e) {
+newBookForm.addEventListener('submit', (e) => {
   e.preventDefault()
   const title = newBookForm.querySelector('input[name="title"').value
   const author = newBookForm.querySelector('input[name="author"').value
