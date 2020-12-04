@@ -27,6 +27,7 @@ const deleteBook = (book, tr) => {
   })
 
   createBtn.textContent = 'Delete'
+  createBtn.setAttribute("class", "btn btn-danger mr-2 ml-3")
   tr.appendChild(createBtn)
 }
 
@@ -45,11 +46,12 @@ const readStatusToggle = (book, tr) => {
   })
 
   createBtn.textContent = "Toggle status"
+  createBtn.setAttribute("class", "btn btn-success")
   tr.appendChild(createBtn)
 }
 
 const displayBook = (book) => {
-  const table = document.querySelector('#table')
+  const tbody = document.querySelector('#tbody')
   const tr = document.createElement('tr')
   const title = document.createElement('td')
   const author = document.createElement('td')
@@ -60,14 +62,14 @@ const displayBook = (book) => {
   author.textContent = book.author
   pages.textContent = book.pages
   read.textContent = book.read
-
+  
   tr.appendChild(title)
   tr.appendChild(author)
   tr.appendChild(pages)
   tr.appendChild(read)
   deleteBook(book, tr)
   readStatusToggle(book, tr)
-  table.appendChild(tr)
+  tbody.appendChild(tr)
 }
 
 // examples
@@ -80,6 +82,10 @@ eachBook(myLibrary)
 
 const displayForm = () => {
   document.getElementById("newBookForm").style.display = "block";
+}
+
+const hideForm = () => {
+  document.getElementById("newBookForm").style.display = "none";
 }
 
 newBookForm.addEventListener('submit', (e) => {
