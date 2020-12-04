@@ -14,21 +14,19 @@
   </head>
 
   <body class="container">
-    <h1 class="text-center mt-4">
-      Library
-    </h1>
+    <h1 class="text-center mt-4">Library</h1>
     <table id="table" class="table col-12 mt-5">
-        <thead>
-          <th scope="col">Title</th>
-          <th scope="col">Author</th>
-          <th scope="col">Pages</th>
-          <th scope="col">Read</th>
-        </thead>
-        <tbody id="tbody"></tbody>
+      <thead>
+        <th scope="col">Title</th>
+        <th scope="col">Author</th>
+        <th scope="col">Pages</th>
+        <th scope="col">Read</th>
+      </thead>
+      <tbody id="tbody"></tbody>
     </table>
 
     <div class="col-12 text-center mt-5 mb-5">
-      <button class="btn btn-primary" onclick="displayForm()" id="form-btn">NEW BOOK</button>
+      <button class="btn btn-primary" id="form-btn">NEW BOOK</button>
     </div>
 
     <form id="newBookForm" class="w-50 m-auto bg-light p-5 rounded">
@@ -80,8 +78,8 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-primary mb-3">Submit</button> <br>
-      <a onclick="hideForm()" href="#">Cancel</a>
+      <button type="submit" class="btn btn-primary mb-3">Submit</button> <br />
+      <a id="cancel-link" href="#">Cancel</a>
     </form>
 
     <script src="./main.js"></script>
