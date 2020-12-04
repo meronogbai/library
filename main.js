@@ -38,7 +38,7 @@ function displayBook(book) {
   deleteBook(tr)
   table.appendChild(tr)
 }
-
+// unnecessary
 function eachBook(library) {
   for (let i = 0; i < library.length; i++) {
     displayBook(library[i])
@@ -46,21 +46,35 @@ function eachBook(library) {
 }
 
 eachBook(myLibrary)
+//
 
 function deleteBook(tr) {
-  const btn = document.createElement('td')
+  // const btn = document.createElement('td')
   const createBtn = document.createElement('button')
 
-  createBtn.addEventListener('click', function(e) {
+  createBtn.addEventListener('click', function (e) {
     const tr = e.target.parentElement
-      tr.parentNode.removeChild(tr)
+    tr.parentNode.removeChild(tr)
   })
 
   createBtn.textContent = 'Delete'
   createBtn.setAttribute('class', 'delete-btn')
-
-  tr.appendChild(btn)
   tr.appendChild(createBtn)
+}
+
+function readStatusToggle(book) {
+  const createBtn = document.createElement('button')
+  if (read === 'yes') {
+    createBtn.textContent = "Finished"
+    createBtn.addEventListener('click', function (e) {
+      book.read = 'No'
+    })
+  } else {
+    createBtn.textContent = "Not Finished"
+    createBtn.addEventListener('click', function (e) {
+      book.read = 'Yes'
+    })
+  }
 }
 
 function displayForm() {
