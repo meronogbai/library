@@ -12,6 +12,8 @@ function addBookToLibrary(book) {
   myLibrary.push(book);
 }
 
+addBookToLibrary(new Book)
+
 let bookOne = new Book("Book One", "JKR", 53, "yes");
 let bookTwo = new Book("Book Two", "Author Two", 23, "no");
 let bookThree = new Book("Book Three", "Author Three", 103, "yes");
@@ -47,5 +49,12 @@ function eachBook(library) {
 eachBook(myLibrary)
 
 function displayForm() {
-  document.getElementById("new-book-form").style.display = "block";
+  document.getElementById("newBookForm").style.display = "block";
+}
+
+function getFormData() {
+  let form = document.forms.newBookForm
+
+  let formData = new FormData(form)
+  let formTitle = formData.get('title')
 }
