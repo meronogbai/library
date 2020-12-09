@@ -1,21 +1,23 @@
-const myLibrary = [];
+const Library = (booksArray) => {
+  const addBookToLibrary = (book) => {
+    booksArray.push(book);
+  };
+  return { booksArray, addBookToLibrary };
+};
 
 const Book = (title, author, pages, read) => ({
   title, author, pages, read,
 });
 
-const addBookToLibrary = (book) => {
-  myLibrary.push(book);
-};
-
+const myLibrary = Library([]);
 
 const deleteBook = (book, tr) => {
   const createBtn = document.createElement('button');
 
   createBtn.addEventListener('click', () => {
     tr.parentNode.removeChild(tr);
-    if (myLibrary.indexOf(book) !== -1) {
-      myLibrary.splice(myLibrary.indexOf(book), 1);
+    if (myLibrary.booksArray.indexOf(book) !== -1) {
+      myLibrary.booksArray.splice(myLibrary.booksArray.indexOf(book), 1);
     }
   });
 
@@ -68,14 +70,14 @@ const displayBook = (book) => {
 // examples
 const exampleOne = Book('Harry Potter', 'JK Rowling', 350, 'Yes');
 const exampleTwo = Book('Mocking Bird', 'Author', 280, 'No');
-addBookToLibrary(exampleOne);
-addBookToLibrary(exampleTwo);
+myLibrary.addBookToLibrary(exampleOne);
+myLibrary.addBookToLibrary(exampleTwo);
 const eachBook = (library) => {
   for (let i = 0; i < library.length; i += 1) {
     displayBook(library[i]);
   }
 };
-eachBook(myLibrary);
+eachBook(myLibrary.booksArray);
 
 // buttons to view and remove add book form
 const newBookForm = document.forms;
@@ -104,5 +106,5 @@ newBookForm.addEventListener('submit', (e) => {
 
   const book = Book(title, author, pages, read);
   displayBook(book);
-  addBookToLibrary(book);
+  myLibrary.addBookToLibrary(book);
 });
