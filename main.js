@@ -80,14 +80,14 @@ const eachBook = (library) => {
 eachBook(myLibrary.booksArray);
 
 // buttons to view and remove add book form
-const newBookForm = document.forms;
+const newBookForm = document.forms[0];
 
 document.querySelector('#form-btn').addEventListener('click', () => {
-  newBookForm.style.display = 'block';
+  newBookForm.classList.toggle('d-none');
 });
 
 document.querySelector('#cancel-link').addEventListener('click', () => {
-  newBookForm.style.display = 'none';
+  newBookForm.classList.add('d-none');
 });
 
 
